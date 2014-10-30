@@ -32,4 +32,9 @@ node[:deploy].each do |application, deploy|
     deploy_data deploy
     app application
   end
+
+  execute "restarting Rails app #{application}" do
+    command "sudo monit restart -g sidekiq_#{application}_group"
+  end
+
 end
